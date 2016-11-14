@@ -9,13 +9,14 @@ module Seeder
   end
 
   def self.create_user email
-    user = User.create!(
+    user = User.where(email: email).first_or_initialize
+    user.update_attributes(
       email: email,
       password: 'password',
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       time_zone: 'Pacific Time (US & Canada)',
-      gender: %w(genderqueer male female trans*).sample
+      gender: %w(genderqueer male female).sample
     )
     user.confirm
     user
