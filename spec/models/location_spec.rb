@@ -68,4 +68,23 @@ describe Location do
       end
     end
   end
+
+  describe "#get_timezone" do
+    subject { location.get_timezone }
+    let(:location) do
+      described_class.new(
+        latitude: 37.0,
+        longitude: -122.0
+      )
+    end
+
+    before do
+      ::Timezone::Lookup.lookup.stub(37.0, -122.0, 'America/Los_Angeles')
+    end
+
+    it "returns the correct ActiveSupport::TimeZone object" do
+      expect(subject.class).to eq(ActiveSupport::TimeZone)
+      expect(subject.name).to eq("Pacific Time (US & Canada)")
+    end
+  end
 end

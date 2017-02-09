@@ -30,6 +30,7 @@ RSpec.configure do |config|
     WebMock.disable_net_connect!(allow_localhost: true)
     Time.zone = 'UTC'
     ActionMailer::Base.deliveries.clear
+    Timezone::Lookup.config(:test)
   end
 
   config.include Devise::TestHelpers, type: :controller
