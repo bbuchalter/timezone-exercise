@@ -69,3 +69,8 @@ jQuery ->
     $dateField = $field.find('.datepicker')
     setUpDatePicker($dateField)
     setUpExclusiveCheckboxes($field)
+
+  $event_location = $('#event_location_id')
+  $event_location.on 'change', (event) ->
+    $.get "/locations/#{$event_location.val()}/timezone", (data) ->
+      $('#event_time_zone').val(data['name'])
