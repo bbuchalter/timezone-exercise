@@ -319,6 +319,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
+    timezone (1.2.4)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
@@ -396,6 +397,7 @@ DEPENDENCIES
   simple_form
   sqlite3
   test_after_commit
+  timezone
   uglifier
   webmock
 

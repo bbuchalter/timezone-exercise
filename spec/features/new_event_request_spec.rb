@@ -77,6 +77,21 @@ describe "New Event" do
     ])
   end
 
+  it "sets the timezone when the location changes", js: true do
+    live_location = create(
+      :location,
+      latitude: 37.0,
+      longitude: -122.0
+      )
+      ::Timezone::Lookup.lookup.stub(37.0, -122.0, 'America/Denver')
+
+    visit "/events/new"
+    expect(page).to have_select('event_time_zone', selected: 'Select Time Zone')
+    page.execute_script("$('#event_location_id').val(#{live_location.id})")
+    page.execute_script("$('#event_location_id').trigger('change')")
+    expect(page).to have_select('event_time_zone', selected: '(GMT-07:00) Mountain Time (US & Canada)')
+  end
+
   it 'allows organizers to specify a whitelist of allowed OSes', js: true do
     fill_in_good_event_details
 

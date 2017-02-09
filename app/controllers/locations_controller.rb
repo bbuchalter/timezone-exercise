@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :index]
-  before_action :assign_location, only: [:show, :edit, :update, :destroy, :archive]
+  before_action :authenticate_user!, except: [:show, :index, :timezone]
+  before_action :assign_location, only: [:show, :edit, :update, :destroy, :archive, :timezone]
 
   def index
     skip_authorization
@@ -9,6 +9,13 @@ class LocationsController < ApplicationController
 
   def show
     skip_authorization
+  end
+
+  def timezone
+    skip_authorization
+    respond_to do |format|
+      format.json { render json: @location.get_timezone }
+    end
   end
 
   def new

@@ -12,6 +12,13 @@ class Location < ActiveRecord::Base
     after_validation :geocode
   end
 
+  def get_timezone
+    timezone_lookup = Timezone.lookup(latitude, longitude)
+    ActiveSupport::TimeZone.all.detect do |timezone|
+      timezone.tzinfo.identifier == timezone_lookup.name
+    end
+  end
+
   def full_address
     "#{address_1}, #{city}, #{state}, #{zip}"
   end

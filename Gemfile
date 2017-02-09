@@ -26,6 +26,7 @@ gem 'icalendar'
 gem 'pg' if ENV['FORCE_POSTGRES']
 gem 'rack-mini-profiler'
 gem 'bower-rails'
+gem 'timezone'
 
 group :production do
   gem 'pg'

@@ -139,6 +139,8 @@ MEETUP_OAUTH_SECRET=5551212
 RAILS_ENV=development
 RACK_ENV=development
 PORT=3000
+GOOGLE_TIMEZONE_API_KEY=ABC123
+GOOGLE_FOR_WORK_CLIENT_ID=8888 (optional)
 ```
 
 With the `.env` file in place, the environment variables will be set every time you start the server with `rails s`.

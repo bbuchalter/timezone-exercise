@@ -14,6 +14,7 @@ Bridgetroll::Application.routes.draw do
 
   resources :locations do
     patch :archive, on: :member
+    get :timezone, on: :member
   end
 
   resources :chapters do
