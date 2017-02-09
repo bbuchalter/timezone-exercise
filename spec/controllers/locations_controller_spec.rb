@@ -111,5 +111,23 @@ describe LocationsController do
         }.not_to change(Location, :count)
       end
     end
+
+    describe '#timezone (json)' do
+      subject { get :timezone, format: 'json', id: @location.id }
+
+      before do
+        @location.update(
+          latitude: 37.0,
+          longitude: -122.0
+        )
+        ::Timezone::Lookup.lookup.stub(37.0, -122.0, 'America/Los_Angeles')
+      end
+
+      it "returns the location's timezone information as JSON" do
+        expect(JSON.parse(subject.body)["name"]).to eq(
+          "Pacific Time (US & Canada)"
+        )
+      end
+    end
   end
 end
